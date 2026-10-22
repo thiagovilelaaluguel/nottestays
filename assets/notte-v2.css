@@ -52,6 +52,12 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:400}
 .site-head.solid .nav .cta:hover,.site-head.always .nav .cta:hover{background:var(--deep-2);color:var(--foam)}
 .drawer nav a{font-weight:400}
 
+/* ---------- Abas dos prédios ----------
+   Defeito antigo: com as duas barras de abas, a primeira vira "relative" mas herdava o top da barra fixa e descia
+   72 px, deixando um vão sob a capa e ficando por cima da segunda barra. */
+.tabs:has(+ .tabs.sub){top:0}
+.tabs a{font-weight:500}
+
 /* ---------- Capa ---------- */
 /* escurecimento firme por trás do texto (o erro da Onefinestay no celular é título branco sumindo na foto clara) */
 .hero::after{background:linear-gradient(180deg,rgba(11,26,42,.62) 0%,rgba(11,26,42,.38) 22%,rgba(11,26,42,.52) 48%,rgba(11,26,42,.94) 100%)}
