@@ -194,6 +194,7 @@
     var p = String(q.get('p') || '').toLowerCase();
     if (p === 'booking') $('#ck-plataforma').value = 'Booking';
     else if (p === 'airbnb') $('#ck-plataforma').value = 'Airbnb';
+    else if (p === 'direto') $('#ck-plataforma').value = 'Direto';   // 24/10/2026: link da mensagem da reserva direta
     else if (/^HM[A-Z0-9]{8}$/i.test(r)) $('#ck-plataforma').value = 'Airbnb';
     else if (/^\d{9,11}$/.test(r)) $('#ck-plataforma').value = 'Booking';
   })();
