@@ -199,17 +199,17 @@
       a: {
         pt: {
           nt: 'Incluídos na estadia: piscina de borda infinita no rooftop (8h às 19h), academia (7h às 22h), salão de jogos, playground e brinquedoteca (8h às 20h). Pagos à parte, direto ao prédio: sauna e hidromassagem (9h às 21h; a hidromassagem precisa de agendamento), lavanderia e adega. Nas áreas comuns é obrigatório usar a pulseira do condomínio.',
-          loft: 'No condomínio: piscina com vista para o mar, academia, lavanderia (paga à parte), espaço gourmet com churrasqueira e mercadinho.',
+          loft: 'No condomínio: piscina com vista para o mar, academia, lavanderia (paga à parte), espaço gourmet e mercadinho.',
           iloa: 'No condomínio: piscinas (com área para as crianças), quadra de beach tennis, restaurante, conveniência 24 horas, segurança 24 horas e muita área verde.'
         },
         en: {
           nt: 'Included in your stay: rooftop infinity pool (8 a.m. to 7 p.m.), gym (7 a.m. to 10 p.m.), game room, playground and kids room (8 a.m. to 8 p.m.). Paid separately to the building: sauna and hot tub (9 a.m. to 9 p.m.; the hot tub needs booking), laundry and wine cellar. The building ID wristband is required in common areas.',
-          loft: 'In the building: sea-view pool, gym, laundry (paid separately), barbecue area and mini market.',
+          loft: 'In the building: sea-view pool, gym, laundry (paid separately), gourmet area and mini market.',
           iloa: 'In the condo: pools (with a kids area), beach tennis court, restaurant, 24-hour convenience store, 24-hour security and lots of green space.'
         },
         es: {
           nt: 'Incluidos en la estadía: piscina infinita en el rooftop (8 a 19 h), gimnasio (7 a 22 h), sala de juegos, playground y juegoteca (8 a 20 h). Se pagan aparte, directo al edificio: sauna e hidromasaje (9 a 21 h; el hidromasaje requiere reserva), lavandería y cava de vinos. En las áreas comunes es obligatorio usar la pulsera del condominio.',
-          loft: 'En el edificio: piscina con vista al mar, gimnasio, lavandería (paga aparte), quincho con parrilla y minimercado.',
+          loft: 'En el edificio: piscina con vista al mar, gimnasio, lavandería (paga aparte), espacio gourmet y minimercado.',
           iloa: 'En el condominio: piscinas (con área para niños), cancha de beach tennis, restaurante, minimercado 24 horas, seguridad 24 horas y mucho verde.'
         }
       }
@@ -313,9 +313,9 @@
         es: ['reservar', 'reserva', 'alquilar', 'airbnb', 'booking']
       },
       a: {
-        pt: 'A reserva é feita pelo **Airbnb** ou pela **Booking**. Os botões de cada studio ficam nas páginas: [New Time](' + NT + '#reservar), [Loft Residence](' + LOFT + '#reservar) e [ILOA](' + ILOA + '#reservar) (o ILOA, por enquanto, só no Airbnb; na Booking, em breve). Também dá para reservar direto com a gente, combinando pelo WhatsApp, mas o ideal é pela plataforma.',
-        en: 'You can book on **Airbnb** or **Booking**. The buttons for each studio are on the pages: [New Time](' + NT + '#reservar), [Loft Residence](' + LOFT + '#reservar) and [ILOA](' + ILOA + '#reservar) (ILOA is on Airbnb only for now; coming soon to Booking). You can also book directly with us on WhatsApp, but booking through the platform is preferred.',
-        es: 'La reserva se hace por **Airbnb** o por **Booking**. Los botones de cada studio están en las páginas: [New Time](' + NT + '#reservar), [Loft Residence](' + LOFT + '#reservar) e [ILOA](' + ILOA + '#reservar) (ILOA, por ahora, solo en Airbnb; en Booking, muy pronto). También se puede reservar directo con nosotros por WhatsApp, pero lo ideal es hacerlo por la plataforma.'
+        pt: 'Reservando **direto com a gente**, você paga **10% menos**. Escolha as datas no calendário da página do imóvel, [New Time](' + NT + '#reservar), [Loft Residence](' + LOFT + '#reservar) ou [ILOA](' + ILOA + '#reservar), e mande o pedido pelo WhatsApp. Depois da nossa confirmação, o pagamento é por Pix, direto na conta do proprietário, e você recebe o contrato de locação por temporada.\nSe preferir, também dá para reservar pelo **Airbnb** ou pela **Booking**, nos botões das mesmas páginas (o ILOA, por enquanto, só no Airbnb).',
+        en: 'Booking **directly with us** costs **10% less**. Pick your dates on the calendar of the property page, [New Time](' + NT + '#reservar), [Loft Residence](' + LOFT + '#reservar) or [ILOA](' + ILOA + '#reservar), and send the request on WhatsApp. Once we confirm, you pay by Pix straight to the owner\'s account and receive the short-term rental contract.\nIf you prefer, you can also book on **Airbnb** or **Booking** with the buttons on the same pages (ILOA is on Airbnb only for now).',
+        es: 'Reservando **directo con nosotros**, pagas **10% menos**. Elige las fechas en el calendario de la página del alojamiento, [New Time](' + NT + '#reservar), [Loft Residence](' + LOFT + '#reservar) o [ILOA](' + ILOA + '#reservar), y envía el pedido por WhatsApp. Después de nuestra confirmación, el pago es por Pix, directo a la cuenta del propietario, y recibes el contrato de alquiler por temporada.\nSi prefieres, también puedes reservar por **Airbnb** o por **Booking**, con los botones de las mismas páginas (ILOA, por ahora, solo en Airbnb).'
       }
     },
     {
@@ -395,17 +395,17 @@
       a: {
         pt: {
           nt: 'No próprio New Time: **Ruca Confeitaria** e **Anamá** (cozinha nordestina, do café da manhã ao jantar) no térreo, e o **Toá Rooftop** no 15º andar. O prédio também tem um mercado autônomo para o básico do dia. São casas independentes, com cobrança à parte.',
-          loft: 'O condomínio tem mercadinho e espaço gourmet com churrasqueira, e a cozinha do studio é equipada.',
+          loft: 'O condomínio tem mercadinho e espaço gourmet, e a cozinha do studio é equipada.',
           iloa: 'O condomínio tem restaurante e conveniência 24 horas, e o apartamento tem cozinha completa.'
         },
         en: {
           nt: 'Right in New Time: **Ruca Confeitaria** and **Anamá** (northeastern Brazilian food, from breakfast to dinner) on the ground floor, and **Toá Rooftop** on the 15th floor. The building also has a self-service market for daily basics. They are independent businesses, paid separately.',
-          loft: 'The building has a mini market and a barbecue area, and the studio kitchen is fully equipped.',
+          loft: 'The building has a mini market and a gourmet area, and the studio kitchen is fully equipped.',
           iloa: 'The condo has a restaurant and a 24-hour convenience store, and the apartment has a full kitchen.'
         },
         es: {
           nt: 'En el mismo New Time: **Ruca Confeitaria** y **Anamá** (cocina del nordeste brasileño, del desayuno a la cena) en la planta baja, y **Toá Rooftop** en el piso 15. El edificio también tiene un mercado autoservicio para lo básico. Son locales independientes, con cobro aparte.',
-          loft: 'El edificio tiene minimercado y quincho con parrilla, y la cocina del studio está equipada.',
+          loft: 'El edificio tiene minimercado y espacio gourmet, y la cocina del studio está equipada.',
           iloa: 'El condominio tiene restaurante y minimercado 24 horas, y el departamento tiene cocina completa.'
         }
       }
@@ -483,9 +483,9 @@
         es: ['pago:3', 'pagar:3', 'pix:3', 'reserva directa', 'directo con ustedes', 'por fuera', 'transferencia', 'deposito']
       },
       a: {
-        pt: 'O ideal é reservar e pagar pela própria plataforma, o Airbnb ou a Booking. Também aceitamos reserva e pagamento direto com a gente: é só combinar pelo WhatsApp.',
-        en: 'The best way is to book and pay through the platform itself, Airbnb or Booking. We also accept direct bookings and payments: just arrange it with us on WhatsApp.',
-        es: 'Lo ideal es reservar y pagar por la propia plataforma, Airbnb o Booking. También aceptamos reserva y pago directo con nosotros: solo hay que coordinarlo por WhatsApp.'
+        pt: 'Na **reserva direta**, que sai **10% mais barata**, você escolhe as datas no calendário da página do imóvel e manda o pedido pelo WhatsApp. Depois da nossa confirmação, o pagamento é por **Pix, direto na conta do proprietário**, e você recebe o contrato de locação por temporada. Reservando pelo Airbnb ou pela Booking, o pagamento é feito na própria plataforma.',
+        en: 'With a **direct booking**, which is **10% cheaper**, you pick your dates on the property page calendar and send the request on WhatsApp. Once we confirm, you pay by **Pix straight to the owner\'s account** and receive the short-term rental contract. If you book on Airbnb or Booking, payment is made on the platform itself.',
+        es: 'En la **reserva directa**, que sale **10% más barata**, eliges las fechas en el calendario de la página del alojamiento y envías el pedido por WhatsApp. Después de nuestra confirmación, el pago es por **Pix, directo a la cuenta del propietario**, y recibes el contrato de alquiler por temporada. Si reservas por Airbnb o por Booking, el pago se hace en la propia plataforma.'
       }
     },
     {
