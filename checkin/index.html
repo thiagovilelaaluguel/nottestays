@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <link rel="stylesheet" href="../assets/chat.css">
-<link rel="stylesheet" href="../assets/notte-v2.css?v=mvqp9l0m">
+<link rel="stylesheet" href="../assets/notte-v2.css?v=mvqv6eho">
 
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -132,6 +132,10 @@
           </div>
         </div>
         <div id="ck-hospedes"></div>
+        <label class="ck-campo ck-tel">
+          <span data-t="tel">Celular (WhatsApp) do titular</span>
+          <input type="tel" name="telefone" id="ck-tel" maxlength="25" inputmode="tel" autocomplete="off" placeholder="(82) 99999-9999" required>
+        </label>
       </fieldset>
 
       <fieldset class="ck-bloco">
@@ -221,6 +225,7 @@
         <span data-t="pais">País</span>
         <input type="text" class="ck-pais" maxlength="40">
       </label>
+      <label class="ck-aceite ck-menor-campo ck-larga" hidden><input type="checkbox" class="ck-menor"> <span data-t="menor">Menor de 18 anos</span></label>
     </div>
   </div>
 </template>

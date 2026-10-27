@@ -31,6 +31,7 @@
       b2: 'Hóspedes', b2ajuda: 'A portaria pede o nome completo e o CPF de todos, inclusive de quem não fez a reserva.',
       quantos: 'Quantas pessoas, ao todo?', hospede: 'Hóspede {n}', titular: 'Hóspede 1 · titular', nome: 'Nome completo', doc: 'Documento',
       passaporte: 'Passaporte (estrangeiro)', crianca: 'Criança sem CPF', numPass: 'Número do passaporte', pais: 'País',
+      menor: 'Menor de 18 anos', tel: 'Celular (WhatsApp) do titular', eTel: 'Informe o celular com DDD.',
       b3: 'Chegada', hora: 'Hora prevista de chegada', tarde: 'Depois das 23h', naosei: 'Ainda não sei',
       carro: 'Vem de carro?', nao: 'Não', sim: 'Sim', placa: 'Placa', modelo: 'Modelo e cor', obs: 'Algo que devemos saber?',
       privT: 'Privacidade',
@@ -55,6 +56,7 @@
       b2: 'Guests', b2ajuda: 'The building requires the full name and ID of every guest, including those who did not book.',
       quantos: 'How many people in total?', hospede: 'Guest {n}', titular: 'Guest 1 · main guest', nome: 'Full name', doc: 'Document',
       passaporte: 'Passport (foreign guest)', crianca: 'Child without CPF', numPass: 'Passport number', pais: 'Country',
+      menor: 'Under 18', tel: 'Main guest mobile (WhatsApp)', eTel: 'Enter the mobile number with country code.',
       b3: 'Arrival', hora: 'Expected arrival time', tarde: 'After 11 p.m.', naosei: 'Not sure yet',
       carro: 'Coming by car?', nao: 'No', sim: 'Yes', placa: 'License plate', modelo: 'Model and color', obs: 'Anything we should know?',
       privT: 'Privacy',
@@ -134,7 +136,7 @@
   var guardados = [];   // preserva o que já foi digitado ao trocar a quantidade
   function lerHospedes() {
     return $$('.ck-hosp').map(function (h) {
-      return { nome: $('.ck-nome', h).value, tipo: $('.ck-tipo', h).value, doc: $('.ck-doc', h).value, pais: $('.ck-pais', h).value };
+      return { nome: $('.ck-nome', h).value, tipo: $('.ck-tipo', h).value, doc: $('.ck-doc', h).value, pais: $('.ck-pais', h).value, menor: $('.ck-menor', h).checked };
     });
   }
   function desenharHospedes() {
@@ -149,7 +151,9 @@
       $('.ck-hosp-n', h).textContent = i === 0 ? t('titular') : t('hospede', { n: i + 1 });
       $$('[data-t]', h).forEach(function (el) { el.textContent = t(el.getAttribute('data-t')); });
       var g = guardados[i];
-      if (g) { $('.ck-nome', h).value = g.nome; $('.ck-tipo', h).value = g.tipo; $('.ck-doc', h).value = g.doc; $('.ck-pais', h).value = g.pais; }
+      if (g) { $('.ck-nome', h).value = g.nome; $('.ck-tipo', h).value = g.tipo; $('.ck-doc', h).value = g.doc; $('.ck-pais', h).value = g.pais; $('.ck-menor', h).checked = !!g.menor; }
+      // 27/10/2026: o titular é sempre maior; dos outros, a portaria (igoove) pede se é menor
+      h.setAttribute('data-titular', i === 0 ? '1' : '');
       ligarHospede(h);
       caixa.appendChild(h);
     }
@@ -164,6 +168,7 @@
       var v = tipo.value;
       $('.ck-doc-campo', h).hidden = v === 'Crianca';
       $('.ck-pais-campo', h).hidden = v !== 'Passaporte';
+      $('.ck-menor-campo', h).hidden = v === 'Crianca' || h.getAttribute('data-titular') === '1';
       $('.ck-doc-rot', h).textContent = v === 'Passaporte' ? t('numPass') : 'CPF';
       doc.inputMode = v === 'CPF' ? 'numeric' : 'text';
       doc.placeholder = v === 'CPF' ? '000.000.000-00' : '';
@@ -228,6 +233,7 @@
       var tipo = $('.ck-tipo', h).value, doc = $('.ck-doc', h).value.trim(), pais = $('.ck-pais', h).value.trim();
       if (!nomeValido(nome)) falha($('.ck-nome', h), t('eNome'));
       var item = { nome: nome, tipo: tipo };
+      if (!$('.ck-menor-campo', h).hidden && $('.ck-menor', h).checked) item.menor = true;
       if (tipo === 'CPF') {
         if (!cpfValido(doc)) falha($('.ck-doc', h), t('eCpf'));
         else if (cpfs[soDigitos(doc)]) falha($('.ck-doc', h), t('eRepetido'));
@@ -240,6 +246,9 @@
       }
       hospedes.push(item);
     });
+    var tel = $('#ck-tel').value.replace(/\s+/g, ' ').trim();
+    var telDig = soDigitos(tel).length;
+    if (telDig < 10 || telDig > 15) falha($('#ck-tel'), t('eTel'));
     var hora = $('#ck-hora').value;
     if (!hora) falha($('#ck-hora'), t('eHora'));
     var carro = null;
@@ -256,7 +265,7 @@
         r: $('#ck-codigo').value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 20),
         p: $('#ck-plataforma').value, n: hospedes.length
       },
-      dados: { hospedes: hospedes, carro: carro, hora: hora, obs: f.obs.value.trim().slice(0, 300), idioma: lang, enviadoEm: new Date().toISOString() },
+      dados: { hospedes: hospedes, telefone: tel.slice(0, 25), carro: carro, hora: hora, obs: f.obs.value.trim().slice(0, 300), idioma: lang, enviadoEm: new Date().toISOString() },
       pote: f.site.value
     };
   }

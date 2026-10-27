@@ -48,7 +48,9 @@
 .ck-step output{min-width:34px;text-align:center;font:500 26px/1 'Cormorant Garamond',serif}
 .ck-hosp{border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-top:12px;background:#FCFAF5}
 .ck-hosp-top{margin-bottom:10px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--sun-ink)}
-.ck-pais-campo[hidden],.ck-doc-campo[hidden]{display:none}
+.ck-pais-campo[hidden],.ck-doc-campo[hidden],.ck-menor-campo[hidden]{display:none}
+.ck-menor-campo{margin-top:0;font-weight:500}
+.ck-tel{display:block;margin-top:14px}
 .ck-priv{background:var(--sand);border-radius:var(--r);padding:16px 18px;margin:4px 0 18px;font-size:13.5px;color:#33404C}
 .ck-priv-t{font:600 14px/1.2 'Work Sans',sans-serif;margin-bottom:6px;color:var(--deep)}
 .ck-aceite{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-weight:600;color:var(--deep);cursor:pointer}
