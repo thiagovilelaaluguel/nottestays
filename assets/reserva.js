@@ -15,7 +15,8 @@
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
 
   function montar(caixa, dados) {
-    var ids = caixa.getAttribute('data-rd').split(',').filter(function (id) { return dados.imoveis[id]; });
+    // 27/10/2026: unidade sem nenhuma noite com preço (1302 antes da escada de preço, calendário que falhou) não ganha aba
+    var ids = caixa.getAttribute('data-rd').split(',').filter(function (id) { return dados.imoveis[id] && Object.keys(dados.imoveis[id].noites || {}).length; });
     if (!ids.length) { caixa.hidden = true; return; }
     caixa.hidden = false;
     var st = { id: ids[0], ent: null, sai: null, pessoas: 2, mes: null };
