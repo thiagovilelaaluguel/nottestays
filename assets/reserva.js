@@ -174,7 +174,7 @@
   if (!caixas.length || !window.fetch) return;
   var raiz = caixas[0].getAttribute('data-root') || './';
   // 28/10/2026: uso pessoal marcado no painel fecha a noite aqui na hora (api/cal.js lê do Google); se falhar, segue sem
-  var usos = fetch('/api/cal?bloqueios=1').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+  var usos = fetch('/api/cal/?bloqueios=1').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
   fetch(raiz + 'reserva/disponibilidade.json', { cache: 'no-cache' })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (d) {
