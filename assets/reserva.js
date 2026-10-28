@@ -173,8 +173,20 @@
   var caixas = document.querySelectorAll('.rd[data-rd]');
   if (!caixas.length || !window.fetch) return;
   var raiz = caixas[0].getAttribute('data-root') || './';
+  // 28/10/2026: uso pessoal marcado no painel fecha a noite aqui na hora (api/cal.js lê do Google); se falhar, segue sem
+  var usos = fetch('/api/cal?bloqueios=1').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
   fetch(raiz + 'reserva/disponibilidade.json', { cache: 'no-cache' })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (d) {
+      return usos.then(function (u) {
+        (u && u.bloqueios || []).forEach(function (b) {
+          var im = d.imoveis && (d.imoveis[b.imovel] || d.imoveis[String(b.imovel).toUpperCase()]);
+          if (!im || !im.noites) return;
+          for (var n in im.noites) if (n >= b.entrada && n < b.saida) delete im.noites[n];
+        });
+        return d;
+      });
+    })
     .then(function (d) { Array.prototype.forEach.call(caixas, function (c) { montar(c, d); }); })
     .catch(function () { Array.prototype.forEach.call(caixas, function (c) { c.hidden = true; }); });
 })();

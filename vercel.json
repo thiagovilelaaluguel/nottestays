@@ -2,6 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": true,
+  "rewrites": [
+    { "source": "/reserva/cal/:arq", "destination": "/api/cal?arq=:arq" }
+  ],
   "headers": [
     {
       "source": "/img/(.*)",
