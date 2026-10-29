@@ -38,7 +38,13 @@ module.exports = async (req, res) => {
     `UID:uso-${imovel.toLowerCase()}-${b.entrada.replace(/-/g, '')}@nottestays.com.br`, `DTSTAMP:${carimbo}`,
     `DTSTART;VALUE=DATE:${b.entrada.replace(/-/g, '')}`, `DTEND;VALUE=DATE:${b.saida.replace(/-/g, '')}`,
     'SUMMARY:Bloqueado (Notte)', 'END:VEVENT'].join('\r\n'));
+  // 29/10/2026, ordem dele ("Pode ajustar"): a Booking deixa o calendário "a validar" há dias. Suspeitas: linha só com
+  // LF (o formato pede CRLF) e calendário sem nenhum evento. Calendário vazio leva uma noite de 2026-01-01, no passado:
+  // não fecha nada.
+  if (!ev.length && !/BEGIN:VEVENT/.test(ics)) ev.push(['BEGIN:VEVENT', `UID:vazio-${imovel.toLowerCase()}@nottestays.com.br`,
+    `DTSTAMP:${carimbo}`, 'DTSTART;VALUE=DATE:20260101', 'DTEND;VALUE=DATE:20260102', 'SUMMARY:Fechado (Notte)', 'END:VEVENT'].join('\r\n'));
   if (ev.length) ics = ics.replace(/END:VCALENDAR\s*$/, ev.join('\r\n') + '\r\nEND:VCALENDAR\r\n');
+  ics = ics.replace(/\r?\n/g, '\r\n');
   res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
   res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
   return res.status(200).send(ics);
