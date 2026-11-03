@@ -37,4 +37,14 @@
 .rd-total b{font:600 26px/1 'Cormorant Garamond',serif}
 .rd-pedir.off{opacity:.45;pointer-events:none}
 .rd-nota{font-size:12.5px;line-height:1.55;color:var(--muted);margin:14px 0 0}
+/* 02/11/2026: bebê, Clube Notte e linhas do total com valor à direita */
+.rd-form{grid-template-columns:1fr 1fr 1.4fr}
+.rd-campo[hidden]{display:none}
+.rd-clube{display:flex;gap:12px;align-items:flex-start;margin:10px 0 4px;padding:12px 14px;border:1px solid var(--line);border-radius:4px;background:#fff;font-size:14px;line-height:1.45;color:var(--muted);cursor:pointer}
+.rd-clube input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--deep)}
+.rd-clube b{color:var(--deep)}
+.rd-regra{font-size:13px;color:var(--muted);margin:8px 2px 0}
+.rd-linha{display:flex;justify-content:space-between;gap:12px}
+.rd-linha span:last-child:not(:first-child){white-space:nowrap;color:var(--deep)}
+@media (max-width:620px){.rd-form{grid-template-columns:1fr 1fr}.rd-form .rd-campo:last-child{grid-column:1/-1}}
 @media (max-width:420px){.rd{padding:22px 14px}.rd-cal{padding:12px 6px 8px}.rd-dia{min-height:46px}.rd-form{grid-template-columns:1fr}}

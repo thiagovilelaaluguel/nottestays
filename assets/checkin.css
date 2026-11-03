@@ -67,3 +67,7 @@
 @media (min-width:640px){.ck-links{flex-direction:row;justify-content:center;flex-wrap:wrap}}
 .btn.ghost-dark{background:transparent;color:var(--deep);border:1px solid var(--line)}
 .btn.ghost-dark:hover{border-color:var(--deep)}
+/* 02/11/2026: segundo parágrafo da privacidade (novidades) e caixinha de novidades com o texto ao lado da marca */
+.ck-priv p+p{margin-top:10px}
+.ck-aceite>span{flex:1 1 0;min-width:0}
+.ck-novidades{font-weight:500}
