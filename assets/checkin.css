@@ -71,3 +71,8 @@
 .ck-priv p+p{margin-top:10px}
 .ck-aceite>span{flex:1 1 0;min-width:0}
 .ck-novidades{font-weight:500}
+
+/* 03/11/2026: mensagem do Clube Notte que abre ao marcar a caixinha (e no fim, se marcou) */
+.ck-clube-msg{margin:8px 0 0 30px;padding:10px 12px;border-left:3px solid var(--deep);background:rgba(15,31,48,.05);border-radius:4px;font-size:14px;line-height:1.45;color:var(--deep)}
+#ck-ok .ck-clube-msg{margin:12px 0 0}
+.ck-clube-msg[hidden]{display:none}

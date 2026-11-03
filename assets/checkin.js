@@ -36,8 +36,13 @@
       carro: 'Vem de carro?', nao: 'Não', sim: 'Sim', placa: 'Placa', modelo: 'Modelo e cor', obs: 'Algo que devemos saber?',
       privT: 'Privacidade',
       priv: 'Usamos estes dados só para liberar a sua entrada no condomínio (exigência da portaria) e para a segurança da estadia. Eles saem do seu celular cifrados e só a administração da Notte consegue ler. Não vendemos nem compartilhamos com mais ninguém além da portaria do prédio. Guardamos pelo tempo que a lei exige e depois apagamos. Para corrigir ou pedir a exclusão, fale com a gente pelo WhatsApp (82) 99619-6123. Base legal: execução do contrato de hospedagem (LGPD, art. 7º, V).',
-      priv2: 'Se você marcar a opção de novidades, usaremos o seu celular também para enviar novidades e ofertas da Notte pelo WhatsApp. Para sair, é só responder SAIR. Base legal desta parte: o seu consentimento (LGPD, art. 7º, I).',
-      novidades: 'Quero receber novidades e ofertas da Notte pelo WhatsApp. Para receber, salve o nosso número (82) 99619-6123 nos seus contatos.',
+      /* 03/11/2026, ele: "se ta na caixinha, coloca isso informando na mensagem que ela abre": a caixinha é a porta do Clube
+         Notte. Sem falar em "reserva direta" nem em desconto aqui: o link deste formulário sai da conversa do Airbnb e da
+         Booking, que proíbem convidar para reservar fora; o convite com a regra vai depois, pelo WhatsApp (acoes-do-dia.js). */
+      priv2: 'Se você marcar a opção do Clube Notte, usaremos o seu celular também para enviar novidades e condições especiais da Notte pelo WhatsApp. Para sair, é só responder SAIR. Base legal desta parte: o seu consentimento (LGPD, art. 7º, I).',
+      novidades: 'Quero entrar no Clube Notte e receber pelo WhatsApp novidades e condições especiais para as próximas estadias. Para receber, salve o nosso número (82) 99619-6123 nos seus contatos.',
+      clubeMsg: '💙 Boas-vindas ao Clube Notte! Depois da sua estadia, mandamos pelo WhatsApp como usar as condições de membro na sua próxima viagem a Maceió. Para sair, é só responder SAIR.',
+      okClube: '💙 Você entrou no Clube Notte. Depois da estadia, mandamos pelo WhatsApp como usar as condições de membro.',
       aceite: 'Li e concordo com o uso dos dados para o check-in.', enviar: 'Enviar dados', enviando: 'Enviando…',
       okT: 'Dados recebidos. Obrigado!', okP: 'Vamos repassar à portaria antes da sua chegada. O código ou as instruções de entrada chegam pela conversa da reserva.',
       guia: 'Ver o guia do hóspede', site: 'Site da Notte', okCorrigir: 'Errou algum dado? É só enviar de novo: vale o último envio.',
@@ -63,8 +68,10 @@
       carro: 'Coming by car?', nao: 'No', sim: 'Yes', placa: 'License plate', modelo: 'Model and color', obs: 'Anything we should know?',
       privT: 'Privacy',
       priv: 'We use these details only to register your entry with the building (a front desk requirement) and for the safety of your stay. They leave your phone encrypted and only Notte management can read them. We never sell or share them with anyone other than the building front desk. We keep them only as long as the law requires and then delete them. To correct or delete your data, message us on WhatsApp +55 82 99619-6123. Legal basis: performance of the lodging contract (Brazilian LGPD, art. 7, V).',
-      priv2: 'If you tick the news option, we will also use your mobile number to send Notte news and offers on WhatsApp. To opt out, just reply STOP. Legal basis for this part: your consent (Brazilian LGPD, art. 7, I).',
-      novidades: 'I\'d like to receive news and offers from Notte on WhatsApp. To receive them, save our number +55 82 99619-6123 in your contacts.',
+      priv2: 'If you tick the Clube Notte option, we will also use your mobile number to send Notte news and special conditions on WhatsApp. To opt out, just reply STOP. Legal basis for this part: your consent (Brazilian LGPD, art. 7, I).',
+      novidades: 'I\'d like to join Clube Notte and get news and special conditions for future stays on WhatsApp. To receive them, save our number +55 82 99619-6123 in your contacts.',
+      clubeMsg: '💙 Welcome to Clube Notte! After your stay, we will send you on WhatsApp how to use the member conditions on your next trip to Maceió. To opt out, just reply STOP.',
+      okClube: '💙 You have joined Clube Notte. After your stay, we will send you on WhatsApp how to use the member conditions.',
       aceite: 'I have read and agree to the use of this data for check-in.', enviar: 'Send details', enviando: 'Sending…',
       okT: 'Details received. Thank you!', okP: 'We will forward them to the front desk before you arrive. Entry instructions come through the booking chat.',
       guia: 'Open the guest guide', site: 'Notte website', okCorrigir: 'Made a mistake? Just send again: the latest submission counts.',
@@ -189,7 +196,8 @@
     r.addEventListener('change', function () { $('#ck-carro').hidden = $('input[name="vemCarro"]:checked').value !== 'sim'; });
   });
   var novEl = $('#ck-novidades');
-  if (novEl) novEl.addEventListener('change', function () { if (novEl.checked) novEl.setAttribute('data-em', new Date().toISOString()); else novEl.removeAttribute('data-em'); });
+  if (novEl) novEl.addEventListener('change', function () { if (novEl.checked) novEl.setAttribute('data-em', new Date().toISOString()); else novEl.removeAttribute('data-em');
+    var cm = $('#ck-clube-msg'); if (cm) cm.hidden = !novEl.checked; });   // 03/11/2026: marcou, abre a mensagem do Clube
   $('#ck-placa').addEventListener('input', function (e) { e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, ''); });
   imovelSel.addEventListener('change', atualizarImovel);
   $$('.ck-lang button').forEach(function (b) { b.addEventListener('click', function () { lang = b.getAttribute('data-lang'); aplicarIdioma(); }); });
@@ -319,6 +327,7 @@
       if (!j || !j.ok) throw new Error('recusado');
       $('#ck-form').hidden = true;
       var ok = $('#ck-ok'); ok.hidden = false; ok.focus();
+      var oc = $('#ck-ok-clube'); if (oc) oc.hidden = !col.dados.novidades;
       ok.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }).catch(function (e) {
       erroGeral(e && e.message === 'sem-cifra' ? t('eNavegador') : t('eRede'));
