@@ -93,7 +93,17 @@
     function livre(n) { return im().noites[n] != null; }
     function preco(n) { var c = st.clube && im().clube; return c && c[n] != null ? c[n] : im().noites[n]; }
     // réveillon e carnaval (mesma regra do programa): devolve o motivo do bloqueio ou null
+    // 05/11/2026: com as regras do Airbnb do imóvel (noites mínimas de quem chega no dia e dias sem chegada), valem só elas
+    function rg() { return im().regras || null; }
+    function minEntrada(s) { var r = rg(); return Math.max(im().minimoNoites, (r && r.min[s]) || 0); }
     function regraDatas(ent, sai) {
+      var r = rg();
+      if (r) {
+        var k = 0; for (var x = ent; x < sai; x = mais(x, 1)) k++;
+        if (r.semChegada.indexOf(ent) > -1) return 'Não há chegada em ' + curta(ent) + '.';
+        if (k < (r.min[ent] || 0)) return 'Chegando em ' + curta(ent) + ', o mínimo é de ' + r.min[ent] + ' noites.';
+        return null;
+      }
       if (!DT) return null;
       var R = DT.reveillon, C = DT.carnaval, n = 0, temR = false, temC = false;
       for (var d = ent; d < sai; d = mais(d, 1)) { n++; if (d === R.noite) temR = true; if (d >= C.de && d <= C.ate) temC = true; }
@@ -102,7 +112,11 @@
       return null;
     }
     // chegada em 01/01 só quando a noite de 31/12 já foi vendida
-    function entradaOk(s) { return livre(s) && !(DT && s === DT.reveillon.primeiroDia && livre(DT.reveillon.noite)); }
+    function entradaOk(s) {
+      if (!livre(s)) return false;
+      if (rg()) return rg().semChegada.indexOf(s) < 0;
+      return !(DT && s === DT.reveillon.primeiroDia && livre(DT.reveillon.noite));
+    }
     // dia pode ser a SAÍDA se todas as noites desde a entrada estão livres e a estadia respeita mínimo, máximo e as datas especiais
     function saidaOk(s) {
       if (!st.ent || s <= st.ent) return false;
@@ -155,10 +169,10 @@
         b.addEventListener('click', clicar);
         grade.appendChild(b);
       }
-      dica.textContent = !st.ent ? 'Toque no dia da chegada.' : !st.sai ? 'Agora toque no dia da saída (mínimo de ' + im().minimoNoites + ' noites).' : 'Toque em outro dia para recomeçar.';
-      // aviso das datas especiais quando a chegada escolhida cai perto delas
+      dica.textContent = !st.ent ? 'Toque no dia da chegada.' : !st.sai ? 'Agora toque no dia da saída (mínimo de ' + minEntrada(st.ent) + ' noites).' : 'Toque em outro dia para recomeçar.';
+      // aviso das datas especiais quando a chegada escolhida cai perto delas (só sem as regras do Airbnb)
       var aviso = '';
-      if (DT && st.ent && !st.sai) {
+      if (DT && !rg() && st.ent && !st.sai) {
         var R = DT.reveillon, C = DT.carnaval;
         if (st.ent <= R.noite && st.ent > R.chegarAte && mais(st.ent, 30) > R.noite) aviso = 'Réveillon: para passar a virada, a chegada é até ' + curta(R.chegarAte) + '.';
         else if (st.ent <= C.ate && mais(st.ent, 30) > C.de) aviso = 'Carnaval (' + curta(C.de) + ' a ' + curta(mais(C.ate, 1)) + '): estadia mínima de ' + C.minimo + ' noites.';
