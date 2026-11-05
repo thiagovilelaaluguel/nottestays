@@ -7,6 +7,7 @@
 .rd-unidades{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .rd-un{font:600 12px/1 'Work Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:12px 16px;border-radius:2px;border:1px solid var(--line);background:#fff;color:var(--deep);cursor:pointer;min-height:44px}
 .rd-un[aria-pressed="true"]{background:var(--deep);color:var(--foam);border-color:var(--deep)}
+.rd-un-predio{display:block;margin-top:5px;font:500 11px/1.2 'Work Sans',sans-serif;letter-spacing:.04em;text-transform:none;opacity:.75}
 .rd-cal{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 10px 10px}
 .rd-cab{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .rd-mes{font:500 20px/1 'Cormorant Garamond',serif;color:var(--deep)}

@@ -36,8 +36,11 @@
     var unidades = el('div', 'rd-unidades');
     if (ids.length > 1) {
       unidades.setAttribute('role', 'group'); unidades.setAttribute('aria-label', 'Unidade');
+      // 05/11/2026: calendário único da página geral (prédios misturados) mostra o prédio embaixo do nome
+      var variosPredios = ids.some(function (id) { return dados.imoveis[id].predio !== dados.imoveis[ids[0]].predio; });
       ids.forEach(function (id) {
         var b = el('button', 'rd-un', dados.imoveis[id].nome); b.type = 'button'; b.setAttribute('data-id', id);
+        if (variosPredios && dados.imoveis[id].predio) b.appendChild(el('small', 'rd-un-predio', dados.imoveis[id].predio));
         b.addEventListener('click', function () { st.id = id; st.ent = st.sai = null; st.mes = null; desenhar(); });
         unidades.appendChild(b);
       });
