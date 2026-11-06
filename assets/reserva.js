@@ -101,7 +101,8 @@
     // réveillon e carnaval (mesma regra do programa): devolve o motivo do bloqueio ou null
     // 05/11/2026: com as regras do Airbnb do imóvel (noites mínimas de quem chega no dia e dias sem chegada), valem só elas
     function rg() { return im().regras || null; }
-    function minEntrada(s) { var r = rg(); return Math.max(im().minimoNoites, (r && r.min[s]) || 0); }
+    // 06/11/2026: o mínimo da noite de chegada no Airbnb vale também para MENOS (1 noite no 1304 e no 1302); sem ele, o padrão
+    function minEntrada(s) { var r = rg(); return r && r.min[s] != null ? r.min[s] : im().minimoNoites; }
     function regraDatas(ent, sai) {
       var r = rg();
       if (r) {
@@ -128,7 +129,7 @@
       if (!st.ent || s <= st.ent) return false;
       var n = 0;
       for (var d = st.ent; d < s; d = mais(d, 1)) { if (!livre(d)) return false; n++; }
-      return n >= im().minimoNoites && n <= im().maximoNoites && !regraDatas(st.ent, s);
+      return n >= minEntrada(st.ent) && n <= im().maximoNoites && !regraDatas(st.ent, s);
     }
     function total() {
       var t = 0, base = 0, n = 0;
@@ -175,7 +176,7 @@
         b.addEventListener('click', clicar);
         grade.appendChild(b);
       }
-      dica.textContent = !st.ent ? 'Toque no dia da chegada.' : !st.sai ? 'Agora toque no dia da saída (mínimo de ' + minEntrada(st.ent) + ' noites).' : 'Toque em outro dia para recomeçar.';
+      dica.textContent = !st.ent ? 'Toque no dia da chegada.' : !st.sai ? 'Agora toque no dia da saída (mínimo de ' + minEntrada(st.ent) + (minEntrada(st.ent) === 1 ? ' noite).' : ' noites).') : 'Toque em outro dia para recomeçar.';
       // aviso das datas especiais quando a chegada escolhida cai perto delas (só sem as regras do Airbnb)
       var aviso = '';
       if (DT && !rg() && st.ent && !st.sai) {
@@ -204,13 +205,13 @@
         return;
       }
       var t = total(), i = im();
-      var l1 = el('p', 'rd-linha'); l1.appendChild(el('span', null, i.nome + ' · ' + curta(st.ent) + ' a ' + curta(st.sai) + ' · ' + t.noites + ' noites'));
+      var l1 = el('p', 'rd-linha'); l1.appendChild(el('span', null, i.nome + ' · ' + curta(st.ent) + ' a ' + curta(st.sai) + ' · ' + t.noites + (t.noites === 1 ? ' noite' : ' noites')));
       resumo.appendChild(l1);
       function linha(txt, val) { var p = el('p', 'rd-linha'); p.appendChild(el('span', null, txt)); if (val != null) p.appendChild(el('span', null, val)); resumo.appendChild(p); }
       if (t.extra || t.clube) {
         linha('Diárias com ' + dados.desconto + '% de desconto', reais(t.diarias + t.clube));
         if (t.clube) linha('Clube Notte (mais ' + (dados.descontoClube - dados.desconto) + '%)', '− ' + reais(t.clube));
-        if (t.extra) { var ex = im().extra; linha('Pessoa extra: ' + (st.pessoas - ex.acimaDe) + ' × R$ ' + ex.porNoite + ' × ' + t.noites + ' noites', '+ ' + reais(t.extra)); }
+        if (t.extra) { var ex = im().extra; linha('Pessoa extra: ' + (st.pessoas - ex.acimaDe) + ' × R$ ' + ex.porNoite + ' × ' + t.noites + (t.noites === 1 ? ' noite' : ' noites'), '+ ' + reais(t.extra)); }
       }
       if (st.clube && !t.clube) linha(t.noites < 2 ? 'O desconto do Clube vale em reservas de 2 noites ou mais; nesta vale o desconto normal de ' + dados.desconto + '%.'
         : 'Nas noites de réveillon e carnaval vale o desconto normal de ' + dados.desconto + '%.');
@@ -221,7 +222,7 @@
       var msg = 'Olá! Quero reservar direto pelo site da Notte.\n' +
         '• ' + i.nome + ' (' + i.predio + ')\n' +
         '• Chegada ' + curta(st.ent) + ' (a partir das ' + i.entrada.replace(':00', 'h') + '), saída ' + curta(st.sai) + ' (até as ' + i.saida.replace(':00', 'h') + ')\n' +
-        '• ' + t.noites + ' noites, ' + st.pessoas + (st.pessoas === 1 ? ' pessoa' : ' pessoas') + (st.bebe ? ' + 1 bebê' : '') + '\n' +
+        '• ' + t.noites + (t.noites === 1 ? ' noite, ' : ' noites, ') + st.pessoas + (st.pessoas === 1 ? ' pessoa' : ' pessoas') + (st.bebe ? ' + 1 bebê' : '') + '\n' +
         (st.clube ? (clubeVale() ? '• Sou do Clube Notte (' + dados.descontoClube + '%)\n' : '• Sou do Clube Notte (1 noite: desconto normal)\n') : '') +
         '• Valor do site: ' + reais(t.total) + '\n' +
         (nome ? '• Nome: ' + nome + '\n' : '') +
