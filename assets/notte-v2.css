@@ -207,3 +207,9 @@ h1 em,h2 em,h3 em{font-style:italic;font-weight:400}
 
 /* ---------- Movimento: só surgir, curto ---------- */
 .reveal{transform:translateY(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+
+
+/* ---------- Menu com 'Investir' (11/11/2026): em telas de 880 a 1023 px os itens ficam numa linha só ---------- */
+@media (min-width:880px) and (max-width:1023px){.nav{gap:0}.nav a{padding:8px 7px;letter-spacing:.1em;white-space:nowrap}}
+/* menu do celular rola quando não cabe na tela (o botão do WhatsApp ficava fora, 11/11/2026) */
+.drawer{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
