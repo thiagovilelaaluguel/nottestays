@@ -1,0 +1,6 @@
+# Notte Stays
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://nottestays.com.br/sitemap.xml
