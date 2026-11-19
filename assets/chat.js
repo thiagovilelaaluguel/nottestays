@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  var WA_NUM = '5582996196123';
+  var WA_NUM = '5582991299268';
   var IG_URL = 'https://www.instagram.com/nottestays/';
   var LANGS = ['pt', 'en', 'es'];
 
@@ -563,9 +563,9 @@
         es: ['whatsapp', 'telefono', 'contacto', 'hablar con', 'humano', 'llamar', 'instagram']
       },
       a: {
-        pt: 'Fale direto com a gente pelo WhatsApp, (82) 99619-6123, e acompanhe as novidades no Instagram, @nottestays.',
-        en: 'Message us directly on WhatsApp, +55 82 99619-6123, and follow us on Instagram, @nottestays.',
-        es: 'Escríbenos directo por WhatsApp, +55 82 99619-6123, y síguenos en Instagram, @nottestays.'
+        pt: 'Fale direto com a gente pelo WhatsApp, (82) 99129-9268, e acompanhe as novidades no Instagram, @nottestays.',
+        en: 'Message us directly on WhatsApp, +55 82 99129-9268, and follow us on Instagram, @nottestays.',
+        es: 'Escríbenos directo por WhatsApp, +55 82 99129-9268, y síguenos en Instagram, @nottestays.'
       }
     },
     {

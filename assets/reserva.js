@@ -6,7 +6,7 @@
    na lista), pessoa extra no New Time (R$ 50) e no ILOA (R$ 40), 1 bebê grátis no New Time e no ILOA, regras de data do
    réveillon e do carnaval (mesma conta do programa/reserva-direta-site.js). */
 (function () {
-  var WA = 'https://wa.me/5582996196123?text=';
+  var WA = 'https://wa.me/5582991299268?text=';
   var MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
   var SEM = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
