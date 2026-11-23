@@ -79,6 +79,7 @@
     var resumo = el('div', 'rd-resumo'); resumo.setAttribute('aria-live', 'polite');
     caixa.appendChild(resumo);
     var btn = el('a', 'btn sun block rd-pedir'); btn.target = '_blank'; btn.rel = 'noopener';
+    btn.setAttribute('data-rd-pedido', '1');   // 23/11/2026: o contador da Notte conta este como "pedido", não como clique comum
     caixa.appendChild(btn);
     var nota = el('p', 'rd-nota', 'A reserva só vale depois da nossa confirmação pelo WhatsApp. O pagamento é por Pix, direto na conta do proprietário do imóvel, e você recebe o contrato de locação por temporada. Preços atualizados em ' + curta(dados.hoje) + '; podem mudar até a confirmação.');
     caixa.appendChild(nota);
@@ -234,6 +235,8 @@
     btn.addEventListener('click', function (ev) {
       if (!btn.getAttribute('href')) { ev.preventDefault(); return; }
       if (window.va) window.va('event', { name: 'reserva-direta-pedido', data: { imovel: st.id } });
+      /* 23/11/2026: contador da Notte (sem nome nem telefone): imóvel, noites, pessoas e se marcou o Clube */
+      if (window.notteConta) { try { var tt = total(); window.notteConta('pedido', st.id + '|' + (tt ? tt.noites : '') + 'n|' + st.pessoas + 'p' + (st.clube ? '|clube' : '')); } catch (e) {} }
     });
 
     desenhar();
